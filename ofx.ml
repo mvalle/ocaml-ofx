@@ -79,7 +79,7 @@ let find_children_by_tag xml_element child_tag =
 
 let get_value_by_tag xml_element child_tag = 
     match (find_child_by_tag xml_element child_tag) with
-    | Some e -> Xml.pcdata e
+    | Some e -> Xml.pcdata (List.hd (Xml.children e))
     | None -> ""
 
 
@@ -122,8 +122,10 @@ let parse_BANKACCTFROM xml =
 let parse_balance xml = 
   match xml with 
   | Some el -> {balamt = float_of_string (get_value_by_tag el "BALAMT");
-		dtasof = get_value_by_tag el "DTASOF"}
+		dtasof = (get_value_by_tag el "DTASOF")}
   | None -> {balamt = 0.; dtasof = ""}
+
+
 
 let parse_STMTRS xml = 
   match xml with
