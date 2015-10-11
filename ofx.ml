@@ -157,19 +157,19 @@ let parse_BANKMSGSRSV1 xml =
 let parse_SONRS xml = 
   match xml with 
   | Some el -> {status_sonrs = parse_STATUS (find_child_by_tag el "STATUS");
-		dtserver = get_value_by_tag el "LANGUAGE";
-		language = get_value_by_tag el "DTSERVER"}
-  | None ->  {status_sonrs = parse_STATUS  xml;
+		dtserver = get_value_by_tag el "DTSERVER";
+		language = get_value_by_tag el "LANGUAGE"}
+  | None -> {status_sonrs = parse_STATUS  xml;
 		dtserver = "";
 		language = ""}
 
 let parse_SIGNONMSGRSRV1 xml = 
   match xml with
   | Some el ->  {sonrs = parse_SONRS (find_child_by_tag el "SONRS")}
-  | None ->  {sonrs = parse_SONRS xml}
+  | None ->   {sonrs = parse_SONRS xml}
 
 let parse_ofx xml = 
   match Xml.tag xml with
-  | "OFX" ->  Some {signonmsgsrsv1 = parse_SIGNONMSGRSRV1 (find_child_by_tag xml "SIGNONMSGRSRV1");
+  | "OFX" ->  Some {signonmsgsrsv1 = parse_SIGNONMSGRSRV1 (find_child_by_tag xml "SIGNONMSGSRSV1");
 		bankmsgsrsv1 = parse_BANKMSGSRSV1 (find_child_by_tag xml "BANKMSGSRSV1") }
   | _ -> None
