@@ -4,7 +4,7 @@ open XmlParser
 type status=  {code : int; 
 	       severity : string}
 
-type sonrs = {status_sonrs : status; 
+type sonrs = {status : status; 
 	      dtserver : string; 
 	      language : string}
 
@@ -156,10 +156,10 @@ let parse_BANKMSGSRSV1 xml =
 
 let parse_SONRS xml = 
   match xml with 
-  | Some el -> {status_sonrs = parse_STATUS (find_child_by_tag el "STATUS");
+  | Some el -> {status = parse_STATUS (find_child_by_tag el "STATUS");
 		dtserver = get_value_by_tag el "DTSERVER";
 		language = get_value_by_tag el "LANGUAGE"}
-  | None -> {status_sonrs = parse_STATUS  xml;
+  | None -> {status = parse_STATUS  xml;
 		dtserver = "";
 		language = ""}
 

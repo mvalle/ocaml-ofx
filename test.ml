@@ -17,8 +17,8 @@ let test_sonrs test_ctxt =
   let file = Xml.parse_file "test_data.ofx" in
   let ofx = Ofx.parse_ofx file in 
   match ofx with
-  | Some o -> OUnit2.assert_equal 0 o.signonmsgsrsv1.sonrs.status_sonrs.code ~msg:"SONRS: Status code does not match" ~printer:string_of_int
-	    ; OUnit2.assert_equal "INFO" o.signonmsgsrsv1.sonrs.status_sonrs.severity ~msg:"SONRS: Status severity does not match"
+  | Some o -> OUnit2.assert_equal 0 o.signonmsgsrsv1.sonrs.status.code ~msg:"SONRS: Status code does not match" ~printer:string_of_int
+	    ; OUnit2.assert_equal "INFO" o.signonmsgsrsv1.sonrs.status.severity ~msg:"SONRS: Status severity does not match"
 	    ; OUnit2.assert_equal "ENG" o.signonmsgsrsv1.sonrs.language  ~msg:"SONRS: Language does not match" ~printer:(fun x -> x)
 	    ; OUnit2.assert_equal "20150215114612.074[+0]" o.signonmsgsrsv1.sonrs.dtserver ~msg:"SONRS: Dtserver does not match"
   | None -> OUnit2.assert_bool "parse_ofx failed to parse the file" false
