@@ -7,3 +7,5 @@ test: ofx.cmx
 ofx.cmx:
 	ocamlfind ocamlopt -package xml-light,oUnit -c ofx.ml
 
+install: ofx.cmx
+	cp ofx.cmx `ocamlc -where`
