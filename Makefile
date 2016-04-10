@@ -1,5 +1,9 @@
-all:
-	ocamlfind ocamlc ofx.ml -package xml-light,oUnit -linkpkg 
+all: ofx.cmx
 
-test:
-	ocamlfind ocamlc ofx.ml test.ml -package xml-light,oUnit -linkpkg -g
+
+test: ofx.cmx
+	ocamlfind ocamlopt -g ofx.cmx test.ml -o test -package xml-light,oUnit -linkpkg
+
+ofx.cmx:
+	ocamlfind ocamlopt -package xml-light,oUnit -c ofx.ml
+
