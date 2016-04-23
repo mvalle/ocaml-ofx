@@ -17,5 +17,5 @@ depends: [
   "xml-light"
   "ounit"
 ]
-available: [ocaml-version: >= "2.0" ]
+available: [ocaml-version: >= "4.02.0" ]
 
