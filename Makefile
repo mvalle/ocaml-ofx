@@ -1,3 +1,10 @@
+
+ifdef PREFIX
+ DESTDIR = $(PREFIX)
+else
+ DESTDIR = `ocamlc -where`
+endif
+
 all: ofx.cmx
 
 
@@ -8,4 +15,5 @@ ofx.cmx:
 	ocamlfind ocamlopt -package xml-light,oUnit -c ofx.ml
 
 install: ofx.cmx
-	cp ofx.cmx `ocamlc -where`
+	echo $(DESTDIR)
+	cp ofx.cmx $(DESTDIR)/bin 
