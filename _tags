@@ -1,0 +1,5 @@
+true :  package(xml-light)
+
+<src> : include
+
+<test/**> : package(oUnit)

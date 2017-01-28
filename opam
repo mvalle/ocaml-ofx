@@ -8,12 +8,18 @@ bug-reports: "https://github.com/mvalle/ocaml-ofx/issues"
 license: "MIT"
 dev-repo: "https://github.com/mvalle/ocaml-ofx.git"
 build: [
-  [make]
+  "ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%"
+]
+build-tests: [
+  ["ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%" "--tests" "true"]
+  ["ocaml" "pkg/pkg.ml" "test"]
 ]
 install: [make "install" "PREFIX=%{prefix}%"]
 remove: ["ocamlfind" "remove" "ofx"]
 depends: [
   "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "topkg" {build}
   "xml-light"
   "ounit"
 ]
